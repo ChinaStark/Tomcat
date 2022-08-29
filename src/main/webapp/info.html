@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+
+<link rel="SHORTCUT ICON" HREF="./favicon.ico">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生数据</title>
+    <style>
+        .el-table .warning-row {
+            background: oldlace;
+        }
+
+        .el-table .success-row {
+            background: #f0f9eb;
+        }
+    </style>
+</head>
+<body>
+
+
+<script src="JS/vue.js"></script>
+<!--<script src="element-ui/lib/in"></script>-->
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<div id="a">
+    <el-form :inline="true" :model="StudentName" class="demo-form-inline">
+        <el-form-item  label="姓名">
+            <el-input v-model="StudentName.name" placeholder="姓名"></el-input>
+        </el-form-item>
+        <el-form-item label="校区">
+            <el-select v-model="StudentName.region" placeholder="校区">
+                <el-option label="红角州" value="红角州"></el-option>
+                <el-option label="枫林" value="枫林"></el-option>
+            </el-select>
+        </el-form-item>
+
+        <el-form-item>
+            <el-button type="primary" @click="Search()">查询</el-button>
+            <el-dialog title="查询数据" :visible.sync="dialogTableVisible">
+                <el-table :data="tabledispaly">
+                    <el-table-column prop="sname"      label="姓名" align="center"></el-table-column>
+                    <el-table-column prop="grade"      label="年级"  width="180"  align="center"></el-table-column>
+                    <el-table-column  prop="id"  label="id" align="center"></el-table-column>
+                    <el-table-column prop="sage"       label="年龄" align="center"></el-table-column>
+                    <el-table-column prop="student_id" label="学号" align="center"></el-table-column>
+                </el-table>
+            </el-dialog>
+            <el-button type="primary" icon="el-icon-edit"  @click="infoVisible = true" circle></el-button>
+            <el-button type="danger" icon="el-icon-delete" @click="dialogVisible = true" circle></el-button>
+            <!--            <el-button   @click="onSubmit" circle></el-button>-->
+
+
+        </el-form-item>
+
+        <el-dialog
+                title="提示"
+                :visible.sync="listdata"
+                width="30%"
+        >
+            <span>确认删除吗</span>
+            <span slot="footer" class="dialog-footer">
+    <el-button @click="listdata = false">取 消</el-button>
+    <el-button type="primary" @click="SubmitForListData()">确 定</el-button>
+  </span>
+        </el-dialog>
+
+
+
+
+
+        <el-dialog
+                title="提示"
+                :visible.sync="dialogVisible"
+                width="30%"
+        >
+            <span>确认删除吗</span>
+            <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="Onsubmit1()">确 定</el-button>
+  </span>
+        </el-dialog>
+    </el-form>
+    <template>
+        <el-table
+                :data="tableData"
+                style="width: 100%"
+                :row-class-name="tableRowClassName"
+                @selection-change="handleSelectionChange">
+            <el-table-column
+                    type="selection"
+                    width="55">
+            </el-table-column>
+            <el-table-column
+                    type="index"
+                    width="50">
+            </el-table-column>
+            <el-table-column prop="sname"      label="姓名" align="center"></el-table-column>
+            <el-table-column prop="grade"      label="年级"  width="180"  align="center"></el-table-column>
+            <el-table-column  prop="region"    label="校区" align="center"></el-table-column>
+            <el-table-column prop="sage"       label="年龄" align="center"></el-table-column>
+            <el-table-column prop="student_id" label="学号" align="center"></el-table-column>
+            <el-table-column prop="student_id"         label="操作" align="center">
+
+
+
+                    <template slot-scope="scope">
+                        <el-button type="success" round @click = "IndexChange2(scope.row.student_id,scope.row.sname)">修改</el-button>
+                        <el-button type="danger" round @click="IndexChange(scope.row.student_id)">删除</el-button>
+                    </template>
+
+
+            </el-table-column>
+        </el-table>
+    </template>
+
+
+
+
+    <el-dialog
+            title="数据修改"
+            :visible.sync="listdata2"
+            width="30%"
+    >
+
+
+        <el-form ref="form" :model="form" label-width="80px">
+            <el-form-item label="姓名">
+                <el-input :disabled="true" v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item label="学号">
+                <el-input :disabled="true"   v-model="form.stuid"></el-input>
+            </el-form-item>
+            <el-form-item label="年龄">
+                <el-input v-model="form.age"></el-input>
+            </el-form-item>
+            <el-form-item label="校区">
+                <el-select v-model="form.region" placeholder="校区">
+                    <el-option label="红角州" value="1"></el-option>
+                    <el-option label="枫林校区" value="2"></el-option>
+                </el-select>
+            </el-form-item>
+
+
+
+            <el-form-item label="年级">
+                <el-radio-group v-model="form.grade">
+                    <el-radio label="一"></el-radio>
+                    <el-radio label="二"></el-radio>
+                    <el-radio label="三"></el-radio>
+                    <el-radio label="四"></el-radio>
+                </el-radio-group>
+            </el-form-item>
+
+
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="listdata2 = false">取 消</el-button>
+    <el-button type="primary" @click="SubmitForUpdata()" >确 定</el-button>
+  </span>
+    </el-dialog>
+
+
+
+
+    <el-dialog
+            title="数据添加"
+            :visible.sync="infoVisible"
+            width="30%"
+    >
+
+
+        <el-form ref="form" :model="Add" label-width="80px">
+            <el-form-item label="姓名">
+                <el-input v-model="Add.sname"></el-input>
+            </el-form-item>
+            <el-form-item label="学号">
+                <el-input v-model="Add.student_id"></el-input>
+            </el-form-item>
+            <el-form-item label="年龄">
+                <el-input v-model="Add.sage"></el-input>
+            </el-form-item>
+            <el-form-item label="校区">
+                <el-select v-model="Add.region" placeholder="校区">
+                    <el-option label="红角州" value="1"></el-option>
+                    <el-option label="枫林校区" value="2"></el-option>
+                </el-select>
+            </el-form-item>
+
+
+
+            <el-form-item label="年级">
+                <el-radio-group v-model="Add.grade">
+                    <el-radio value="1" label="1"></el-radio>
+                    <el-radio value="2" label="2"></el-radio>
+                    <el-radio value="3" label="3"></el-radio>
+                    <el-radio value="4" label="4"></el-radio>
+                </el-radio-group>
+            </el-form-item>
+
+
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="infoVisible = false">取 消</el-button>
+    <el-button type="primary" @click="onSubmit()" >确 定</el-button>
+        </span>
+    </el-dialog>
+
+
+
+</div>
+
+
+
+
+<script>
+
+    new Vue({
+        el:"#a",
+        methods: {
+
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+                console.log(this.multipleSelection)
+            },
+            tableRowClassName({row, rowIndex}) {
+                if (rowIndex === 1) {
+                    return 'warning-row';
+                } else if (rowIndex === 3) {
+                    return 'success-row';
+                }
+                return '';
+            },
+            IndexChange(e){
+                this.listdata = true;
+                this.index = e
+                console.log(e)
+            },
+            SubmitForUpdata(){
+                this.listdata2 = false
+                console.log(this.index2)
+            },
+            SubmitForListData(){
+                this.listdata = false;
+                let _this = this
+                console.log(this.index)
+                axios({
+                    method:"post",
+                    url:"http://localhost:8080/TomcatDemo/Demo2",
+                    data:_this.index
+                }).then(function (res){
+                    console.log(res.data)
+
+
+                })
+                window.location.reload()
+            },
+            onSubmit() {//新记录的添加
+                this.infoVisible = false;
+                let _this = this
+                this.Add.sname = encodeURIComponent(this.Add.sname)
+                axios({
+                    method:"post",
+                    url:"http://localhost:8080/TomcatDemo/Add",
+                    data:_this.Add
+                }).then(function (res){
+                    console.log(res.data)
+                    if(res.data  === 'Success'){
+                        _this.$message({
+                            type: 'success',
+                            message: '添加成功!'
+                        });
+                        window.location.reload()
+                    }else{
+                        _this.$message({
+                            message: '添加失败！！！',
+                            type: 'warning'
+                        });
+                    }
+                })
+
+            },
+            Onsubmit1(){
+                this.dialogVisible = false;
+                console.log(this.multipleSelection)
+
+            },
+            IndexChange2(id,name){
+
+                this.index2 = id
+                this.form.name = name
+                this.form.stuid = id
+                this.listdata2 = true;
+            },
+            Search(){
+                this.tabledispaly = []
+                let j = 0;
+                this.dialogTableVisible = true
+                for(let i = 0;i<this.tableData.length;i++){
+
+                    if(this.tableData[i].sname === this.StudentName.name && this.tableData[i].region === this.StudentName.region){
+
+                        this.tabledispaly[j++] = this.tableData[i]
+                    }
+                }
+                console.log(this.tabledispaly)
+            },
+
+        },
+        data() {
+            return {
+                listdata2 : false,
+                dialogTableVisible : false,
+                index : '',//delete
+                index2 :'', // change data
+                listdata : false,
+                tabledispaly : [] ,
+                dialogVisible: false,
+                infoVisible:false,
+                tableData: [],
+                multipleSelection: [],
+                StudentName: {
+                    name: '',
+                    region: ''
+                },
+                form:{//新记录的添加
+                    name: '',
+                    region: '',
+                    age: '',
+                    stuid: '',
+                    grade:''
+                },
+                Add: {
+                    student_id: '',
+                    region: '',
+                    sage: '',
+                    sname: '',
+                    grade:''
+
+                }
+            }
+
+        },
+        mounted(){
+            let _this = this;
+
+            axios({
+                method:"post",
+                url:"http://localhost:8080/TomcatDemo/Demo3"
+            }).then(function (res){
+
+                // this.Student = resp.data;此时的this是Windows的
+                _this.tableData = res.data;
+                for(let j = 0; j < _this.tableData.length; j++) {
+                    if(_this.tableData[j].region % 2 === 0){
+                        _this.tableData[j].region = '红角州'
+                    }else{
+                        _this.tableData[j].region = '枫林'
+                    }
+                }
+            })
+        }
+    })
+</script>
+
+</body>
+
+
+
+
+</html>

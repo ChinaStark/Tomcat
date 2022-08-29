@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+
+<link rel="SHORTCUT ICON" HREF="../favicon_1.ico">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="login.js"></script>
+</head>
+<body class="back-img">
+<!--检查登陆状态-->
+<!--<script>isLogin();</script>-->
+<form onsubmit="return check()" action="/TomcatDemo/Demo" method="post">
+    <fieldset>
+        <div class="input-box">
+            <p>&nbsp&nbsp&nbsp登&nbsp&nbsp录</p>
+            <sup><span class="error" id="info">&nbsp;</span></sup>
+            <input type="text" name="username" placeholder="用户名" id="username" title="输入用户名">
+            <sup><span class="error" id="usernameErr">&nbsp;</span></sup>
+            <br>
+            <input type="password" name="password" placeholder="密码" id="password" title="输入密码">
+            <sup><span class="error" id="passwordErr" ></span></sup>
+            <br>
+            <!--<label for="keepLogin">保持7天登录</label>-->
+            <!--<input type="checkbox" name="keepLogin" id="keepLogin">-->
+            <input class="button" type="submit" value="登&nbsp&nbsp&nbsp录" id="login" title="登录">
+            <a class="button" href="../register/register.html" id="register" title="注册">注&nbsp&nbsp&nbsp册</a>
+        </div>
+        <br>
+        <div class="other">
+            <a id="forget" onclick="forget()" title="忘记密码">😇忘记密码</a>
+            <a id="help" onclick="help()" title="帮助">帮助🤷‍</a>
+        </div>
+    </fieldset>
+</form>
+
+</body>
+</html>

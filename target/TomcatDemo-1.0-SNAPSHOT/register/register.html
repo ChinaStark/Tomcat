@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+
+<link rel="SHORTCUT ICON" HREF="../favicon_1.ico">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+
+
+</head>
+<body>
+
+<style>
+    .register{
+        text-align: center; /*让div内部文字居中*/
+        background-color: #fff;
+        border-radius: 20px;
+        width: 300px;
+        height: 350px;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+<script src="../JS/vue.js"></script>
+<!--<script src="element-ui/lib/in"></script>-->
+<script src="../element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="../element-ui/lib/theme-chalk/index.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<div id="register"  style="align-items: center" >
+
+
+    <el-form ref="form" :model="form" label-width="80px" style="text-align: center">
+        <el-form-item label="用户名" style="display: inline-block">
+            <el-input v-model="form.name"  ></el-input>
+        </el-form-item><br>
+        <el-form-item label="用户密码" style="display: inline-block">
+            <el-input v-model="form.pwd"></el-input>
+        </el-form-item>
+
+
+
+
+
+        <el-form-item>
+            <el-button type="primary" :plain="true"  @click="onSubmit">立即注册</el-button>
+            <el-button>取消</el-button>
+        </el-form-item>
+    </el-form>
+
+
+</div>
+
+<script>
+
+
+    new Vue({
+        el:"#register",
+        methods:{
+            sleep(delay) {
+                var start = (new Date()).getTime();
+                while((new Date()).getTime() - start < delay) {
+
+                }
+            },
+            jump(){
+
+
+            }
+            ,
+            open() {
+                this.$message({
+                    type: 'success',
+                    message: '注册成功!'
+                });
+            }
+            ,
+            onSubmit() {
+                if(this.form.name === ''||this.form.pwd ===  ''){
+                    this.$message({
+                        message: '注册失败！！！',
+                        type: 'warning'
+                    });
+                }else{
+                    const _this = this;
+                    console.log(_this.form)
+                    axios({
+                        method:"post",
+                        url:"http://localhost:8080/TomcatDemo/register",
+                        data:_this.form
+                    }).then(function (res) {
+                        if (res.data === 'Success'){
+                            _this.open();
+                            _this.sleep(2000);
+                            window.location.href="http://localhost:8080/TomcatDemo/login/login.html";
+
+
+
+                        }
+                    });
+                }
+
+
+
+
+
+
+                    // // this.Student = resp.data;此时的this是Windows的
+                    // console.log(res.data)
+
+
+
+
+            }
+
+        },
+        data(){
+            return {
+                form: {
+                    name: '',
+                    pwd:''
+                }
+
+
+            };
+        }
+
+    })
+</script>
+</body>
+</html>
