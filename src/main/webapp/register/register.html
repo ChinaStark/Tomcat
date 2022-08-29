@@ -1,8 +1,19 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
+
+
+<link rel="SHORTCUT ICON" HREF="../favicon_1.ico">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+=======
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+>>>>>>> origin/main
 
 
 </head>
@@ -45,7 +56,11 @@
 
 
         <el-form-item>
+<<<<<<< HEAD
+            <el-button type="primary" :plain="true"  @click="onSubmit">立即注册</el-button>
+=======
             <el-button type="primary" @click="onSubmit">立即注册</el-button>
+>>>>>>> origin/main
             <el-button>取消</el-button>
         </el-form-item>
     </el-form>
@@ -54,6 +69,11 @@
 </div>
 
 <script>
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> origin/main
     new Vue({
         el:"#register",
         methods:{
@@ -76,6 +96,33 @@
             }
             ,
             onSubmit() {
+<<<<<<< HEAD
+                if(this.form.name === ''||this.form.pwd ===  ''){
+                    this.$message({
+                        message: '注册失败！！！',
+                        type: 'warning'
+                    });
+                }else{
+                    const _this = this;
+                    console.log(_this.form)
+                    axios({
+                        method:"post",
+                        url:"http://localhost:8080/TomcatDemo/register",
+                        data:_this.form
+                    }).then(function (res) {
+                        if (res.data === 'Success'){
+                            _this.open();
+                            _this.sleep(2000);
+                            window.location.href="http://localhost:8080/TomcatDemo/login/login.html";
+
+
+
+                        }
+                    });
+                }
+
+
+=======
                 const _this = this;
                 console.log(_this.form)
                 axios({
@@ -92,6 +139,7 @@
 
                     }
                 });
+>>>>>>> origin/main
 
 
 

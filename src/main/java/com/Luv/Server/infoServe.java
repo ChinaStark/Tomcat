@@ -26,4 +26,36 @@ public class infoServe {
         sqlSession.commit();
         sqlSession.close();
     }
+<<<<<<< HEAD
+    public int delete(int id) {
+        SqlSessionFactory factory = sqlFactory.getFactory();
+        SqlSession sqlSession = factory.openSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int p = mapper.Deleteone(id);
+        sqlSession.commit();
+        sqlSession.close();
+        return p;
+    }
+
+    public int Addstudent(Student student) {
+        SqlSessionFactory factory = sqlFactory.getFactory();
+        SqlSession sqlSession = factory.openSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int addstudent = mapper.Addstudent(student);
+        sqlSession.commit();
+        sqlSession.close();
+        return addstudent;
+    }
+
+    public int Modify(Student student) {
+        SqlSessionFactory factory = sqlFactory.getFactory();
+        SqlSession sqlSession = factory.openSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int addstudent = mapper.Addstudent(student);
+        sqlSession.commit();
+        sqlSession.close();
+        return addstudent;
+    }
+=======
+>>>>>>> origin/main
 }

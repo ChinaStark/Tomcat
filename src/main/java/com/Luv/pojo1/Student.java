@@ -7,6 +7,30 @@ public class Student {
     private  Integer    sage;
     private  Integer    grade;
     private  Integer    id  ;
+<<<<<<< HEAD
+    private  Integer    region;
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "student_id=" + student_id +
+                ", sname='" + sname + '\'' +
+                ", sage=" + sage +
+                ", grade=" + grade +
+                ", id=" + id +
+                ", region=" + region +
+                '}';
+    }
+
+    public void setRegion(Integer region) {
+        this.region = region;
+    }
+
+    public Integer getRegion() {
+        return region;
+    }
+=======
+>>>>>>> origin/main
 
     public Integer getStudent_id() {
         return student_id;
@@ -48,6 +72,8 @@ public class Student {
         this.id = id;
     }
 
+<<<<<<< HEAD
+=======
     @Override
     public String toString() {
         return "Student{" +
@@ -58,4 +84,5 @@ public class Student {
                 ", id=" + id +
                 '}';
     }
+>>>>>>> origin/main
 }

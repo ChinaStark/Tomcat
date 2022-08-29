@@ -17,7 +17,11 @@ import java.util.Objects;
 @WebFilter("/info.html")
 public class FilterDemo1 implements Filter {
     public void init(FilterConfig config) throws ServletException {
+<<<<<<< HEAD
+
+=======
         System.out.println("built");
+>>>>>>> origin/main
     }
 
     public void destroy() {
@@ -34,7 +38,11 @@ public class FilterDemo1 implements Filter {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         //获取数据
 
+<<<<<<< HEAD
+
+=======
         System.out.println("get...");
+>>>>>>> origin/main
         Object u = session.getAttribute("username");
         Object p =  session.getAttribute("password");
         if(u == null || p == null){
@@ -45,7 +53,11 @@ public class FilterDemo1 implements Filter {
         String password = p.toString();
         String username = new String(u.toString().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
         int isUser = mapper.IsUser(username, password);
+<<<<<<< HEAD
+
+=======
         System.out.println("isUser");
+>>>>>>> origin/main
 
 
         sqlSession.close();
@@ -57,8 +69,13 @@ public class FilterDemo1 implements Filter {
             session.setAttribute("msg","0");
             response1.sendRedirect("http://localhost:8080/TomcatDemo/login/login.html");
         }
+<<<<<<< HEAD
+//        System.out.println(request.getParameter("password"));//测试代码
+
+=======
         System.out.println(request.getParameter("password"));//测试代码
         System.out.println("Filter...");
+>>>>>>> origin/main
 
 
     }
