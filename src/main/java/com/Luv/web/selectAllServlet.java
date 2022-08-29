@@ -29,7 +29,11 @@ public class selectAllServlet extends HttpServlet {
 
         //获取sqlsession，用来执行sql语句
         List<Student> students = infoServe.SelectAll();
+<<<<<<< HEAD
 
+=======
+        System.out.println("implement sql...");
+>>>>>>> origin/main
 
         String jsonString = JSON.toJSONString(students);
         res.setContentType("text/json;charset = utf-8");

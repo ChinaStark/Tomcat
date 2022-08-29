@@ -8,7 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet( "/Forward")
+<<<<<<< HEAD
 public class    RequestForward extends HttpServlet {
+=======
+public class RequestForward extends HttpServlet {
+>>>>>>> origin/main
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Forward...");
         request.getRequestDispatcher("/info/info.html").forward(request,response);

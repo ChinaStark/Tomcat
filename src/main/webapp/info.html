@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 
 
 <link rel="SHORTCUT ICON" HREF="./favicon.ico">
@@ -7,6 +8,12 @@
 <head>
     <meta charset="UTF-8">
     <title>学生数据</title>
+=======
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+>>>>>>> origin/main
     <style>
         .el-table .warning-row {
             background: oldlace;
@@ -33,12 +40,18 @@
         </el-form-item>
         <el-form-item label="校区">
             <el-select v-model="StudentName.region" placeholder="校区">
+<<<<<<< HEAD
                 <el-option label="红角州" value="红角州"></el-option>
                 <el-option label="枫林" value="枫林"></el-option>
+=======
+                <el-option label="红角州" value="shanghai"></el-option>
+                <el-option label="枫林校区" value="beijing"></el-option>
+>>>>>>> origin/main
             </el-select>
         </el-form-item>
 
         <el-form-item>
+<<<<<<< HEAD
             <el-button type="primary" @click="Search()">查询</el-button>
             <el-dialog title="查询数据" :visible.sync="dialogTableVisible">
                 <el-table :data="tabledispaly">
@@ -49,6 +62,9 @@
                     <el-table-column prop="student_id" label="学号" align="center"></el-table-column>
                 </el-table>
             </el-dialog>
+=======
+            <el-button type="primary" @click="onSubmit">查询</el-button>
+>>>>>>> origin/main
             <el-button type="primary" icon="el-icon-edit"  @click="infoVisible = true" circle></el-button>
             <el-button type="danger" icon="el-icon-delete" @click="dialogVisible = true" circle></el-button>
             <!--            <el-button   @click="onSubmit" circle></el-button>-->
@@ -56,6 +72,7 @@
 
         </el-form-item>
 
+<<<<<<< HEAD
         <el-dialog
                 title="提示"
                 :visible.sync="listdata"
@@ -71,6 +88,8 @@
 
 
 
+=======
+>>>>>>> origin/main
 
         <el-dialog
                 title="提示"
@@ -80,7 +99,11 @@
             <span>确认删除吗</span>
             <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
+<<<<<<< HEAD
     <el-button type="primary" @click="Onsubmit1()">确 定</el-button>
+=======
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+>>>>>>> origin/main
   </span>
         </el-dialog>
     </el-form>
@@ -100,6 +123,7 @@
             </el-table-column>
             <el-table-column prop="sname"      label="姓名" align="center"></el-table-column>
             <el-table-column prop="grade"      label="年级"  width="180"  align="center"></el-table-column>
+<<<<<<< HEAD
             <el-table-column  prop="region"    label="校区" align="center"></el-table-column>
             <el-table-column prop="sage"       label="年龄" align="center"></el-table-column>
             <el-table-column prop="student_id" label="学号" align="center"></el-table-column>
@@ -113,10 +137,26 @@
                     </template>
 
 
+=======
+            <el-table-column  prop="id"  label="id" align="center">
+                {{panduan()}}
+            </el-table-column>
+            <el-table-column prop="sage"       label="年龄" align="center"></el-table-column>
+
+            <el-table-column prop="student_id" label="学号" align="center"></el-table-column>
+            <el-table-column prop="id"         label="操作" align="center">
+                <el-row>
+
+                    <el-button type="success" round>修改</el-button>
+
+                    <el-button type="danger" round>删除</el-button>
+                </el-row>
+>>>>>>> origin/main
             </el-table-column>
         </el-table>
     </template>
 
+<<<<<<< HEAD
 
 
 
@@ -168,11 +208,16 @@
 
     <el-dialog
             title="数据添加"
+=======
+    <el-dialog
+            title="提示"
+>>>>>>> origin/main
             :visible.sync="infoVisible"
             width="30%"
     >
 
 
+<<<<<<< HEAD
         <el-form ref="form" :model="Add" label-width="80px">
             <el-form-item label="姓名">
                 <el-input v-model="Add.sname"></el-input>
@@ -207,6 +252,19 @@
     <el-button @click="infoVisible = false">取 消</el-button>
     <el-button type="primary" @click="onSubmit()" >确 定</el-button>
         </span>
+=======
+    <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="活动名称">
+            <el-input v-model="form.name"></el-input>
+        </el-form-item>
+
+
+    </el-form>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="infoVisible = false">取 消</el-button>
+    <el-button type="primary" @click="onSubmit()" >确 定</el-button>
+  </span>
+>>>>>>> origin/main
     </el-dialog>
 
 
@@ -234,6 +292,7 @@
                 }
                 return '';
             },
+<<<<<<< HEAD
             IndexChange(e){
                 this.listdata = true;
                 this.index = e
@@ -318,6 +377,22 @@
                 index2 :'', // change data
                 listdata : false,
                 tabledispaly : [] ,
+=======
+            onSubmit() {
+                this.infoVisible = false;
+                console.log(this.StudentName);
+            },
+            panduan(){
+                if(this.tableData[0].id === 1){
+                    return"红角州";
+                }else{
+                    return "枫林";
+                }
+            }
+        },
+        data() {
+            return {
+>>>>>>> origin/main
                 dialogVisible: false,
                 infoVisible:false,
                 tableData: [],
@@ -326,6 +401,7 @@
                     name: '',
                     region: ''
                 },
+<<<<<<< HEAD
                 form:{//新记录的添加
                     name: '',
                     region: '',
@@ -340,6 +416,17 @@
                     sname: '',
                     grade:''
 
+=======
+                form: {
+                    name: '',
+                    region: '',
+                    date1: '',
+                    date2: '',
+                    delivery: false,
+                    type: [],
+                    resource: '',
+                    desc: ''
+>>>>>>> origin/main
                 }
             }
 
@@ -354,6 +441,7 @@
 
                 // this.Student = resp.data;此时的this是Windows的
                 _this.tableData = res.data;
+<<<<<<< HEAD
                 for(let j = 0; j < _this.tableData.length; j++) {
                     if(_this.tableData[j].region % 2 === 0){
                         _this.tableData[j].region = '红角州'
@@ -361,6 +449,8 @@
                         _this.tableData[j].region = '枫林'
                     }
                 }
+=======
+>>>>>>> origin/main
             })
         }
     })

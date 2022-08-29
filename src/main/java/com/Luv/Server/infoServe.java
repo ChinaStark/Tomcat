@@ -26,6 +26,7 @@ public class infoServe {
         sqlSession.commit();
         sqlSession.close();
     }
+<<<<<<< HEAD
     public int delete(int id) {
         SqlSessionFactory factory = sqlFactory.getFactory();
         SqlSession sqlSession = factory.openSession();
@@ -55,4 +56,6 @@ public class infoServe {
         sqlSession.close();
         return addstudent;
     }
+=======
+>>>>>>> origin/main
 }

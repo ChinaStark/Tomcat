@@ -1,7 +1,13 @@
 package com.Luv.Map;
 
 import com.Luv.pojo1.Student;
+<<<<<<< HEAD
 import org.apache.ibatis.annotations.*;
+=======
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+>>>>>>> origin/main
 
 import java.util.List;
 
@@ -14,6 +20,7 @@ public interface UserMapper {
     int IsUser(@Param("user")String name,@Param("pwd")String pwd);
     @Insert("insert into t_use values (#{user} , #{pwd})")
     void Add(@Param("user")String name,@Param("pwd")String pwd);
+<<<<<<< HEAD
 
 
 
@@ -26,4 +33,6 @@ public interface UserMapper {
     @Update("update studene set  =  where ;")
     int updata();
     
+=======
+>>>>>>> origin/main
 }
